@@ -1,0 +1,82 @@
+package ejsBasicos;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Calculadora {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Calculadora");
+        frame.setSize(300, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
+
+        JTextField pantalla = new JTextField();
+        pantalla.setEditable(false);
+        pantalla.setFont(new Font("Arial", Font.BOLD, 24));
+        frame.add(pantalla, BorderLayout.NORTH);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(5, 4, 5, 5));
+
+        String[] botones = {
+            "7", "8", "9", "/",
+            "4", "5", "6", "*",
+            "1", "2", "3", "-",
+            "0", ".", "=", "+",
+            "C"
+        };
+
+        double[] num1 = new double[1];
+        String[] operador = new String[1];
+
+        for (String texto : botones) {
+            JButton btn = new JButton(texto);
+            
+            btn.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    String comando = e.getActionCommand();
+
+                    if ("0123456789.".contains(comando)) {
+                        pantalla.setText(pantalla.getText() + comando);
+                    } else if (comando.contains("+-*/")) {
+                        try {
+                            num1[0] = Double.parseDouble(pantalla.getText());
+                            operador[0] = comando;
+                            pantalla.setText("");
+                        } catch (NumberFormatException ex) {
+                            pantalla.setText("Error");
+                        }
+                    } else if (comando.equals("=")) {
+                        try {
+                            double num2 = Double.parseDouble(pantalla.getText());
+                            double resultado = 0;
+                            switch (operador[0]) {
+                                case "+": resultado = num1[0] + num2; break;
+                                case "-": resultado = num1[0] - num2; break;
+                                case "*": resultado = num1[0] * num2; break;
+                                case "/":
+                                    if (num2 == 0) {
+                                        pantalla.setText("Div/0");
+                                        return;
+                                    }
+                                    resultado = num1[0] / num2; break;
+                            }
+                            pantalla.setText(String.valueOf(resultado));
+                        } catch (Exception ex) {
+                            pantalla.setText("Error");
+                        }
+                    } else if (comando.equals("C")) {
+                        pantalla.setText("");
+                        num1[0] = 0;
+                        operador[0] = "";
+                    }
+                }
+            });
+            panel.add(btn);
+        }
+
+        frame.add(panel, BorderLayout.CENTER);
+        frame.setVisible(true);
+    }
+}

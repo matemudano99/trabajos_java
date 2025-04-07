@@ -1,0 +1,11 @@
+package ejsBasicos;
+
+import javax.swing.JFrame;
+
+public class NumerosAleatorios {
+	public static void main(String[] args) {
+		JFrame frame = new JFrame();
+		frame.setSize(200,100);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+}

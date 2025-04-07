@@ -1,0 +1,13 @@
+package ejsBasicos;
+
+import java.awt.Color;
+
+import javax.swing.JFrame;
+
+public class Calculadora {
+	public static void main(String[] args) {
+		JFrame frame = new JFrame();
+		frame.setBackground(Color.LIGHT_GRAY);
+		frame.setVisible(true);
+	}
+}

@@ -1,0 +1,30 @@
+package ejsBasicos;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class NumerosAleatorios {
+	public static void main(String[] args) {
+		JFrame frame = new JFrame();
+		frame.setSize(200,100);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JPanel panel = new JPanel();
+		frame.add(panel);
+		
+		JTextField num1= new JTextField(5);
+		panel.add(num1);
+		
+		JTextField num2= new JTextField(5);
+		panel.add(num2);
+		
+		JButton boton = new JButton();
+		panel.add(boton);
+		
+		frame.setVisible(true);
+		boton.
+		
+	}
+}

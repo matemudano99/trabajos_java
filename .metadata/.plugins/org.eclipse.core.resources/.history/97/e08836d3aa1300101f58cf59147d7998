@@ -1,0 +1,24 @@
+package ejsBasicos;
+
+import java.awt.Color;
+import java.awt.GridLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
+
+public class Calculadora {
+	public static void main(String[] args) {
+		JFrame frame = new JFrame();
+		frame.setBackground(Color.LIGHT_GRAY);
+		frame.setSize(300,500);
+		frame.setVisible(true);
+		
+		JPanel panel = new JPanel(new GridLayout(8, 4, 1, 6));
+		
+		JTextPane pantalla = new JTextPane();
+		panel.add(pantalla);
+		
+		frame.add(panel);
+	}
+}

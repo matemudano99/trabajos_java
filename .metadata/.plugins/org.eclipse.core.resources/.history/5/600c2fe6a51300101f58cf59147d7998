@@ -1,0 +1,42 @@
+package ejsBasicos;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class NumerosAleatorios {
+	public static void main(String[] args) {
+		JFrame frame = new JFrame();
+		frame.setSize(200,100);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JPanel panel = new JPanel();
+		frame.add(panel);
+		
+		JTextField num1textField= new JTextField(5);
+		panel.add(num1textField);
+		String num1Str = num1textField.getText();
+		int num1 = Integer.parseInt(num1Str);
+		
+		JTextField num2textField= new JTextField(5);
+		panel.add(num2textField);
+		String num2Str = num2textField.getText();
+		int num2 = Integer.parseInt(num2Str);
+		
+		JButton boton = new JButton();
+		panel.add(boton);
+		
+		frame.setVisible(true);
+		boton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		System.out.println(num1+" "+num2);
+	}
+}
