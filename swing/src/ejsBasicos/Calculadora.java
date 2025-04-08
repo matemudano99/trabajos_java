@@ -5,33 +5,39 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Calculadora {
+	static double num1 = 0;
+	static String operador = "";
+	
     public static void main(String[] args) {
         JFrame frame = new JFrame("Calculadora");
-        frame.setSize(300, 400);
+        frame.setSize(400, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
 
         JTextField pantalla = new JTextField();
         pantalla.setEditable(false);
-        pantalla.setFont(new Font("Arial", Font.BOLD, 24));
+        pantalla.setFont(new Font("Arial", Font.BOLD, 40));
         frame.add(pantalla, BorderLayout.NORTH);
+      
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5, 4, 5, 5));
+        panel.setLayout(new GridLayout(6, 4, 2, 2));
 
         String[] botones = {
-            "7", "8", "9", "/",
-            "4", "5", "6", "*",
-            "1", "2", "3", "-",
-            "0", ".", "=", "+",
-            "C"
+        	"%","√","x²","1/x",
+        	"CE","C","⌫","/",
+            "7", "8", "9", "X",
+            "4", "5", "6", "-",
+            "1", "2", "3", "+",
+            "±", "0", ",", "="
         };
 
-        double[] num1 = new double[1];
-        String[] operador = new String[1];
 
         for (String texto : botones) {
             JButton btn = new JButton(texto);
+            btn.setBackground(Color.WHITE);
+            btn.setFont(new Font("Arial", Font.BOLD, 20));
+            btn.setBorder(null);
             
             btn.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -39,30 +45,25 @@ public class Calculadora {
 
                     if ("0123456789.".contains(comando)) {
                         pantalla.setText(pantalla.getText() + comando);
-                    } else if ("+-*/".contains(comando)) {
-                            num1[0] = Double.parseDouble(pantalla.getText());
-                            operador[0] = comando;
+                    } else if ("+-X/".contains(comando)) {
+                            num1 = Double.parseDouble(pantalla.getText());
+                            operador = comando;
                             pantalla.setText("");
                     } else if (comando.equals("=")) {
                             double num2 = Double.parseDouble(pantalla.getText());
                             double resultado = 0;
-                            switch (operador[0]) {
-                                case "+": resultado = num1[0] + num2; break;
-                                case "-": resultado = num1[0] - num2; break;
-                                case "*": resultado = num1[0] * num2; break;
-                                case "/":
-                                    if (num2 == 0) {
-                                        pantalla.setText("Div/0");
-                                        return;
-                                    }
-                                    resultado = num1[0] / num2; break;
+                            switch (operador) {
+                                case "+": resultado = num1 + num2; break;
+                                case "-": resultado = num1 - num2; break;
+                                case "X": resultado = num1 * num2; break;
+                                case "/": resultado = num1 / num2; break;
                             }
                             pantalla.setText(String.valueOf(resultado));
 
-                    } else if (comando.equals("C")) {
+                    } else if (comando.equals("C") || comando.equals("CE")) {
                         pantalla.setText("");
-                        num1[0] = 0;
-                        operador[0] = "";
+                        num1 = 0;
+                        operador = "";
                     }
                 }
             });
