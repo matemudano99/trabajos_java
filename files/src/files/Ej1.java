@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
+//Crea un programa que permita al usuario crear un archivo y un directorio. El programa debe solicitar al usuario el nombre del archivo y del directorio y luego crear ambos en el sistema de archivos.
+
 public class Ej1 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
