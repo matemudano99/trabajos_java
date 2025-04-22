@@ -1,0 +1,187 @@
+package actividad_evaluable;
+
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.*;
+import java.util.ArrayList;
+
+public class Main {
+	public static void main(String[] args) {
+		while (true) {
+			crearUsuario();
+		}
+	}
+
+	public static void crearUsuario() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+		// MODO TEMA
+		String[] modos = { "Claro", "Oscuro" };
+		String modo = (String) JOptionPane.showInputDialog(null, "Selecciona el modo de color:", "Modo",
+				JOptionPane.QUESTION_MESSAGE, null, modos, modos[0]);
+
+		Color fondo;
+		Color letra;
+
+		if ("Oscuro".equals(modo)) {
+			fondo = Color.DARK_GRAY;
+			letra = Color.WHITE;
+		} else {
+			fondo = Color.WHITE;
+			letra = Color.BLUE;
+		}
+
+		panel.setBackground(fondo);
+
+		// NOMBRE
+		JTextField nombreField = new JTextField(15);
+		JLabel nombreLabel = new JLabel("Nombre:");
+		nombreLabel.setForeground(letra);
+		panel.add(nombreLabel);
+		panel.add(nombreField);
+
+		// APELLIDOS
+		JTextField apellidosField = new JTextField(15);
+		JLabel apellidosLabel = new JLabel("Apellidos (Dos):");
+		apellidosLabel.setForeground(letra);
+		panel.add(apellidosLabel);
+		panel.add(apellidosField);
+
+		// GENERO
+		JComboBox<Genero> generoBox = new JComboBox<>(Genero.values());
+		JLabel generoLabel = new JLabel("Género:");
+		generoLabel.setForeground(letra);
+		panel.add(generoLabel);
+		panel.add(generoBox);
+
+		// USUARIO
+		JTextField userField = new JTextField(15);
+		JLabel userLabel = new JLabel("Usuario:");
+		userLabel.setForeground(letra);
+		panel.add(userLabel);
+		panel.add(userField);
+
+		// CONTRASEÑA
+		JPasswordField passField = new JPasswordField(15);
+		JLabel passLabel = new JLabel("Contraseña:");
+		passLabel.setForeground(letra);
+		panel.add(passLabel);
+		panel.add(passField);
+
+		// TELÉFONO
+		JTextField telefonoField = new JTextField(10);
+		JLabel telefonoLabel = new JLabel("Teléfono:");
+		telefonoLabel.setForeground(letra);
+		panel.add(telefonoLabel);
+		panel.add(telefonoField);
+
+		// DESTINO
+		String[] destinos = { "Elija su destino", "España", "Italia", "Francia", "Alemania", "Portugal", "Japón",
+				"Brasil", "Canadá", "Australia", "Egipto" };
+		JComboBox<String> destinoBox = new JComboBox<>(destinos);
+		JLabel destinoLabel = new JLabel("Destino:");
+		destinoLabel.setForeground(letra);
+		panel.add(destinoLabel);
+		panel.add(destinoBox);
+
+		// VACUNAS
+		JCheckBox vac1 = new JCheckBox("COVID-19");
+		JCheckBox vac2 = new JCheckBox("Fiebre Amarilla");
+		JCheckBox vac3 = new JCheckBox("Tétanos");
+		JCheckBox vac4 = new JCheckBox("Hepatitis B");
+
+		vac1.setForeground(letra);
+		vac2.setForeground(letra);
+		vac3.setForeground(letra);
+		vac4.setForeground(letra);
+		vac1.setBackground(fondo);
+		vac2.setBackground(fondo);
+		vac3.setBackground(fondo);
+		vac4.setBackground(fondo);
+
+		panel.add(new JLabel("Vacunas (Mínimo 3):")).setForeground(letra);
+		panel.add(vac1);
+		panel.add(vac2);
+		panel.add(vac3);
+		panel.add(vac4);
+
+		int result = JOptionPane.showConfirmDialog(null, panel, "Formulario de Registro", JOptionPane.OK_CANCEL_OPTION);
+
+		if (result == JOptionPane.OK_OPTION) {
+			// VALIDACIONES
+
+			String nombre = nombreField.getText().trim();
+			String apellidos = apellidosField.getText().trim();
+			String usuario = userField.getText().trim();
+			String telefono = telefonoField.getText().trim();
+			String destino = (String) destinoBox.getSelectedItem();
+			char[] password = passField.getPassword();
+
+			int vacunasSeleccionadas = 0;
+			if (vac1.isSelected())
+				vacunasSeleccionadas++;
+			if (vac2.isSelected())
+				vacunasSeleccionadas++;
+			if (vac3.isSelected())
+				vacunasSeleccionadas++;
+			if (vac4.isSelected())
+				vacunasSeleccionadas++;
+
+			if (nombre.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "El nombre no puede estar vacío.");
+				return;
+			}
+
+			if (!apellidos.matches("\\w+\\s\\w+")) {
+				JOptionPane.showMessageDialog(null, "Introduce dos apellidos separados por espacio.");
+				return;
+			}
+
+			if (usuario.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "El usuario no puede estar vacío.");
+				return;
+			}
+
+			if (password.length == 0) {
+				JOptionPane.showMessageDialog(null, "La contraseña no puede estar vacía.");
+				return;
+			}
+
+			if (!telefono.matches("\\d+")) {
+				JOptionPane.showMessageDialog(null, "El teléfono solo debe contener números.");
+				return;
+			}
+
+			if (destino.equals("Elija su destino")) {
+				JOptionPane.showMessageDialog(null, "Debe elegir un destino válido.");
+				return;
+			}
+
+			if (vacunasSeleccionadas < 3) {
+				JOptionPane.showMessageDialog(null, "Debe seleccionar al menos 3 vacunas.");
+				return;
+			}
+
+			// TODO CORRECTO → Mostrar segunda ventana con datos
+			String mensaje = "Datos Registrados:\n";
+			mensaje += "Nombre: " + nombre + "\n";
+			mensaje += "Apellidos: " + apellidos + "\n";
+			mensaje += "Género: " + generoBox.getSelectedItem() + "\n";
+			mensaje += "Usuario: " + usuario + "\n";
+			mensaje += "Teléfono: " + telefono + "\n";
+			mensaje += "Destino: " + destino + "\n";
+			mensaje += "Vacunas: ";
+			if (vac1.isSelected())
+				mensaje += "COVID-19 ";
+			if (vac2.isSelected())
+				mensaje += "Fiebre Amarilla ";
+			if (vac3.isSelected())
+				mensaje += "Tétanos ";
+			if (vac4.isSelected())
+				mensaje += "Hepatitis B ";
+
+			JOptionPane.showMessageDialog(null, mensaje, "Resumen", JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+}

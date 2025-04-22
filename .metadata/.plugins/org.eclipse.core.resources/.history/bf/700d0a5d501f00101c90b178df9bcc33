@@ -1,0 +1,15 @@
+package files;
+
+import java.io.File;
+import java.io.IOException;
+
+public class Main {
+	public static void main(String[] args) {
+	
+		File dir1 = new File("directory");
+		if(dir1.mkdir()) {
+			System.out.println("se ha creado el directorio en "+dir1.getPath());
+		}
+		
+}
+}

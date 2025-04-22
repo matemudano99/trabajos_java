@@ -1,0 +1,24 @@
+package files;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Ej1 {
+	public static void main(String[] args) throws IOException {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Dime el nombre del directorio");
+		String nombreFolder = sc.next();
+		System.out.println("Dime el nombre del archivo");
+		String nombreFile = sc.next();
+
+		File folder = new File(nombreFolder);
+		File file = new File(nombreFile);
+		if (folder.mkdir()) {
+			System.out.println("Se ha creado el directorio");
+
+		} else {
+			System.out.println("No se ha podido crear el escritorio");
+		}
+	}
+}
