@@ -21,7 +21,7 @@ public class Ej1 {
 			try {
 				file.createNewFile();
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.out.println("Error");
 			}
 		} else {
 			System.out.println("No se ha podido crear el escritorio");

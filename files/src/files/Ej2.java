@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Ej2 {
 	public static void main(String[] args) {
+		while(true) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Renombrador de archivos\n");
 		System.out.println("Dime el nombre de la carpeta o archivo a cambiar: ");
@@ -19,6 +20,8 @@ public class Ej2 {
 			file.renameTo(newFile);			
 		} else {
 			System.out.println("No existe ese archivo");
+		}
+		
 		}
 	}
 }
