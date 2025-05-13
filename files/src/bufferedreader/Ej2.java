@@ -8,13 +8,12 @@ import java.util.Stack;
 public class Ej2 {
     public static void main(String[] args) throws IOException {
         BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
-        String linea;
-
+        
         while (true) {
             System.out.println("Introduce una línea (o 'salir' para terminar):");
-            linea = sc.readLine();
+            String linea = sc.readLine();
             if (linea == null || linea.trim().equalsIgnoreCase("salir")) {
-                break;
+                return;
             }
 
             Stack<Character> pila = new Stack<>();

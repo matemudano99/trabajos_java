@@ -23,7 +23,7 @@ public class Ruleta {
 
 				if (file.delete()) {
 					System.out.println("Adios");
-					while(true) {
+					while (true) {
 						Thread.sleep(1000);
 						System.out.println(".");
 					}
