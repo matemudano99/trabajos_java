@@ -27,10 +27,10 @@ public class ConectorDB {
 		int resultado = 0;
 		if (conn != null) {
 			try {
-				Statement statement = conn.createStatement();
+				Statement stmt = conn.createStatement();
 				String consulta = " INSERT INTO Personal (nombre,apellido,id,sueldo,telefono,correo) VALUES ('Carlos', 'Ramírez', 101, 28000, '612345678', 'carlos.ramirez@example.com'),('Lucía', 'Fernández', 102, 32000, '613456789', 'lucia.fernandez@example.com'),('Miguel', 'Santos', 103, 30000, '614567890', 'miguel.santos@example.com'), ('Andrea', 'López', 104, 35000, '615678901', 'andrea.lopez@example.com'), ('Javier', 'Martínez', 105, 29000, '616789012', 'javier.martinez@example.com');  ";
-				resultado = statement.executeUpdate(consulta);
-				statement.close();
+				resultado = stmt.executeUpdate(consulta);
+				stmt.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -42,13 +42,13 @@ public class ConectorDB {
 		int resultado = 0;
 		if (conn != null) {
 			try {
-				Statement statement = conn.createStatement();
-				ResultSet resultset = statement.executeQuery("SELECT max(sueldo) from personal");
-				if (resultset.next()) {
-					resultado = resultset.getInt(1);
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT max(sueldo) from personal");
+				if (rs.next()) {
+					resultado = rs.getInt(1);
 				}
-				statement.close();
-				resultset.close();
+				stmt.close();
+				rs.close();
 
 			} catch (SQLException e) {
 				System.out.println("Error");
@@ -60,15 +60,15 @@ public class ConectorDB {
 	public void mostrarEmpleados() {
 		if (conn != null) {
 			try {
-				Statement statement = conn.createStatement();
-				ResultSet rs = statement.executeQuery("SELECT nombre,telefono from personal");
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT nombre,telefono from personal");
 				while (rs.next()) {
 					String nombre = rs.getString("nombre");
 					int telefono = rs.getInt("telefono");
 					System.out.println("Nombre: " + nombre);
 					System.out.println("Telefono: " + telefono);
 				}
-				statement.close();
+				stmt.close();
 				rs.close();
 			} catch (SQLException e) {
 				System.out.println("Error");
